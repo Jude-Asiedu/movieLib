@@ -1,5 +1,5 @@
-<div class="table-responsive" style="border-radius: 15px;">
-  <table class=" table  table-striped  no-wrap v-middle table-hover">
+<div class="table-responsive" style="border-radius: 15px;" *ngIf="tableRecords?.length > 0 else nodataAvailable">
+  <table class=" table  table-striped  no-wrap v-middle table-hover" >
     <thead>
     <tr class="bg-light">
         <th class="font-weight-light"> #</th>
@@ -14,15 +14,28 @@
         <td> {{num + 1}}</td>
         <td> {{data.title}}</td>
         <td> {{data.category}}</td>
-        <td> {{data.release_year}}</td>
+        <td> {{data.release_year |date : "mediumDate" }}</td>
         <td>
           <button class="btn btn-outline-info btn-sm mr-2" (click)="openModal(editData,data,'edit','lg')" ngbTooltip="Edit" > <i class="fa fa-pencil-square-o"></i></button>
           <button class="btn btn-outline-danger btn-sm" (click)="openModal(deleteData,data,'remove','md')" ngbTooltip="Edit" > <i class="fa fa-trash"></i></button>
         </td>
       </tr>
+     <tr  *ngIf="!((tableRecords | filter :keywords)?.length)" >
+      <td  classs="text-center" colspan="5">
+        <h6  class=" text-center p-3">    <i class="fa fa-exclamation text-danger" aria-hidden="true"></i>  Sorry, there are no movies with title <b> {{keywords}} </b> </h6>
+     </td>
+     </tr>
     </tbody>
     </table>
 </div>
+<ng-template #nodataAvailable>
+  <div class="row px-4 mt-5 pt-4">
+    <div class="col-10 mx-auto text-center" *ngIf="!keywords">
+      <h4> Sorry ,there are no records available</h4>
+      <a  routerLink="/addMovie"class="btn btn-outline-dark" > ADD MOVIE </a>
+    </div>
+   </div>
+</ng-template>
 <ng-template #editData let-modal>
   <div class="modal-header">
       <h5 class="modal-title" id="modal-basic-title">
@@ -43,17 +56,11 @@
             <div class="mb-4">
               <label  class="mb-0" for="applicationName"> <small class="font-weight-normal fs-13"> Release year  </small> <sup class="text-danger"> *</sup> </label>
               <div class="input-group">
-                <input type="text" class="form-control "
+                <input type="date" class="form-control "
                 placeholder="Select a year"
                 formControlName="release_year"
-                name="durationDate"
-                bsDatepicker
-                 />
+                name="durationDate"/>
               </div>
-              <!--
-                [bsConfig]="{ dateInputFormat: 'Do MMM YYYY ',isAnimated: true, containerClass: 'theme-dark-blue'  }
-                [maxDate]="getMaxdate()"
-                -->
             </div>
             <div class="mb-4">
               <label  class="mb-0" for="applicationName"> <small class="font-weight-normal fs-13"> Category  </small> <sup class="text-danger"> *</sup> </label>

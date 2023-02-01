@@ -10,8 +10,6 @@ export class GlobalServiceService {
   getMovieList(){
     let results =  localStorage.getItem('data');
     if(results){
-      console.log(results);
-
       return JSON.parse(results);
     }else{return null; }
   }
