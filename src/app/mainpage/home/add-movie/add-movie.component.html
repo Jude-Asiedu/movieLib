@@ -1,0 +1,53 @@
+<div class="container-fluid p-5">
+<div class="row p-5 mt-5">
+  <div class="col-10 col-sm-10 col-md-10 col-lg-8  mx-auto ">
+   <div class="row">
+    <div class="col-6">
+     <h2 class="font-weight-bold"> New Movie Form</h2>
+    </div>
+    <div class="col-6 text-right">
+      <button class="btn btn-outline-info" (click)="goBack()">
+        <i class="fa fa-arrow-left text-dark mr-2"></i> Return to home </button>
+    </div>
+   </div>
+  </div>
+   <div class=" col-10 col-sm-10 col-md-10 col-lg-8 mx-auto  mt-4 ">
+    <div class="card p-5 shadow-sm">
+    <form [formGroup]="movieForm" >
+      <div class="row">
+        <div class="col-12 mx-auto">
+        <div class="mb-4">
+            <label  class="mb-0" for="applicationName"> <small class="font-weight-normal fs-13">Movie Title  </small> <sup class="text-danger"> *</sup> </label>
+            <div class="input-group">
+              <input class="form-control" formControlName="title" type="text"  placeholder="Enter movie title">
+            </div>
+          </div>
+          <div class="mb-4">
+            <label  class="mb-0" for="applicationName"> <small class="font-weight-normal fs-13"> Release year  </small> <sup class="text-danger"> *</sup> </label>
+            <div class="input-group">
+              <input type="date" class="form-control "
+              placeholder="Select date"
+              formControlName="release_year"
+              #filteDates />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label  class="mb-0" for="applicationName"> <small class="font-weight-normal fs-13"> Category  </small> <sup class="text-danger"> *</sup> </label>
+            <div class="input-group">
+              <select  class="form-control " formControlName="category"  placeholder="Select movie category" id="category_names">
+                <option value="{{cat}}" *ngFor="let cat of categories">{{cat | titlecase}} </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-10 mt-3 mx-auto">
+          <button type="submit" class="btn btn-sm btn-block btn-success" (click)="addNewMovie()" [disabled]="movieForm.invalid">
+            SUBMIT
+          </button>
+        </div>
+      </div>
+    </form>
+   </div>
+  </div>
+</div>
+</div>

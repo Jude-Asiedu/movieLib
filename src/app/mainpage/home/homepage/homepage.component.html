@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row pt-5 mt-5 ">
+    <div class="col-8 col-sm-10 col-md-10 col-lg-8 mx-auto  mt-5">
+     <div class="row mb-2">
+      <div class="col-4">
+        <h3> Movie List </h3>
+      </div>
+      <div class="col-8 text-right">
+        <div class="row">
+          <div class="col-2">
+            <!-- <button class="mr-1 btn btn-primary rounded-5"> Add Movie</button> -->
+          </div>
+          <div class="col-10">
+        <input type="text"  class="form-control " [(ngModel)]="keyword" placeholder="Search" >
+
+          </div>
+        </div>
+      </div>
+     </div>
+    </div>
+    <div class="col-sm-10 col-md-10 col-lg-8 mx-auto my-1 ">
+      <app-table [tableRecords]="movieListdata"  [keywords]="keyword" ></app-table>
+   </div>
+  </div>
+</div>
